@@ -1,263 +1,206 @@
-/*
-  TODO 3: Elige los colores de tu piñata.
-  --color-1, --color-2 y --color-3 pintan los picos y las tiras de papel.
-  --cuerpo pinta el centro de la piñata.
-  Usa estos colores o cualquier otro que te guste:
-    Rosa mexicano #E4007C
-    Amarillo      #FFC21A
-    Turquesa      #00A6A6
-    Naranja       #FF7A1A
-    Verde limón   #8BD346
-    Morado        #7A2AB8
-    Azul talavera #1F4AA8
-    Coral         #F0505A
-  Ejemplo: --color-1: #8BD346;
-*/
 :root {
-  --color-1: #E4007C;
-  --color-2: #FFC21A;
-  --color-3: #00A6A6;
-  --cuerpo: #FFF6E5;
-}
-
-/* A partir de aquí no necesitas cambiar nada, pero puedes explorar */
-:root {
+  --fondo: #FFF6E5;
+  --patio: #FFE7C2;
   --tinta: #2B1D14;
-  --pared: #FBF6EE;
-  --cal: #F8E3C4;
   --blanco: #FFFDF9;
-  --barro: #C0673D;
-  --mecate: #C9A46A;
-  --madera: #9C6B45;
-  --madera-oscura: #6E4A2F;
-
-  --fuente: "Bricolage Grotesque", system-ui, sans-serif;
-  --fuente-rotulo: "Shrikhand", "Arial Black", serif;
-
-  /* Franjas de sarape */
-  --sarape: linear-gradient(
-    #E4007C 0 16%, var(--tinta) 16% 20%, #FF7A1A 20% 32%, #FFC21A 32% 46%,
-    var(--tinta) 46% 50%, #00A6A6 50% 64%, #1F4AA8 64% 78%,
-    var(--tinta) 78% 82%, #7A2AB8 82% 100%
-  );
-
-  /* Tamaño de la piñata y largo de la cuerda */
-  --tam: min(380px, 80vw, 38svh);
-  --cuerda: calc(var(--tam) * 0.55 + 24px);
+  --mecate: #C89B62;
+  --color-1: #E4007C; /* Rosa mexicano */
+  --color-2: #00A896; /* Turquesa */
+  --color-3: #FF7A1A; /* Naranja */
+  --cuerpo: #FFC21A;  /* Amarillo */
+  --fuente-base: 'Bricolage Grotesque', system-ui, sans-serif;
+  --fuente-rotulo: 'Shrikhand', cursive;
 }
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
-}
-
-[hidden] {
-  display: none !important;
 }
 
 body {
   margin: 0;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  background: var(--pared);
-  color: var(--tinta);
-  font-family: var(--fuente);
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Franja de sarape arriba: todo el color de la página vive aquí y en la piñata */
-body::before {
-  content: "";
-  display: block;
-  height: 18px;
-  background: var(--sarape);
-}
-
-.fiesta {
-  flex: 1;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(1.25rem, 5vw, 2.5rem) 1rem 0;
-  text-align: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--fondo);
+  background-image: radial-gradient(rgb(43 29 20 / 0.08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--tinta);
+  font-family: var(--fuente-base);
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fiesta {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: auto 0;
 }
 
 .titulo {
-  max-width: 18ch;
   margin: 0;
   font-family: var(--fuente-rotulo);
-  font-size: clamp(2rem, 7.5vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.1;
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  text-align: center;
   color: var(--color-1);
-  text-wrap: balance;
+  text-shadow: 3px 3px 0 var(--cuerpo), -1px -1px 0 var(--tinta), 1px -1px 0 var(--tinta), -1px 1px 0 var(--tinta), 2px 2px 0 var(--tinta);
+  line-height: 1.1;
 }
 
-/* Patio: la pared donde cuelga la piñata */
+/* Escenario del patio */
 
 .patio {
   position: relative;
-  width: min(880px, 100%);
-  flex: 1;
-  min-height: calc(var(--cuerda) + var(--tam) * 0.66 + var(--subir, 0px) + 6.5rem);
-  margin-top: clamp(1rem, 4vw, 1.75rem);
-  background: var(--cal);
-  border: 3px solid var(--tinta);
+  width: 100%;
+  height: clamp(420px, 65dvh, 540px);
+  background: linear-gradient(180deg, #D9F2FF 0%, #FFF3DB 78%, #E2A76F 78%, #C98A52 100%);
+  border: 4px solid var(--tinta);
   border-radius: 24px;
-  box-shadow: 0 18px 40px rgb(43 29 20 / 0.12);
+  box-shadow: 0 8px 0 var(--tinta);
+  overflow: hidden;
   touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
   cursor: crosshair;
 }
 
-/* Techo de papel de china: capas de flecos, de adelante hacia atrás */
+/* Papel picado superior */
+
 .techo {
   position: absolute;
-  inset: 0 0 auto;
-  z-index: 2;
-  height: 70px;
-  border-radius: 21px 21px 0 0;
+  top: 0;
+  left: -10px;
+  right: -10px;
+  height: 38px;
+  z-index: 5;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 50% 0, #E4007C 12.5px, transparent 13px) 0 6px / 26px 13px repeat-x,
-    linear-gradient(#E4007C, #E4007C) 0 0 / 100% 6px no-repeat,
-    radial-gradient(circle at 50% 0, #FF7A1A 14.5px, transparent 15px) 9px 16px / 30px 15px repeat-x,
-    linear-gradient(#FF7A1A, #FF7A1A) 0 0 / 100% 16px no-repeat,
-    radial-gradient(circle at 50% 0, #FFC21A 16.5px, transparent 17px) 4px 28px / 34px 17px repeat-x,
-    linear-gradient(#FFC21A, #FFC21A) 0 0 / 100% 28px no-repeat,
-    radial-gradient(circle at 50% 0, #2E933C 15.5px, transparent 16px) 14px 40px / 32px 16px repeat-x,
-    linear-gradient(#2E933C, #2E933C) 0 0 / 100% 40px no-repeat,
-    radial-gradient(circle at 50% 0, #7A2AB8 18.5px, transparent 19px) 6px 50px / 38px 19px repeat-x,
-    linear-gradient(#7A2AB8, #7A2AB8) 0 0 / 100% 50px no-repeat;
-  filter: drop-shadow(0 3px 0 rgb(43 29 20 / 0.15));
-}
-
-/* Macetas en las esquinas, paradas sobre el piso */
-.maceta {
-  position: absolute;
-  bottom: 68px;
-  width: clamp(56px, 13vw, 120px);
-  pointer-events: none;
-}
-
-.maceta-izquierda { left: 3%; }
-.maceta-derecha { right: 3%; }
-
-/* El piso de madera donde caen los dulces */
-.patio::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 72px;
-  border-top: 3px solid var(--tinta);
-  border-radius: 0 0 21px 21px;
-  background: repeating-linear-gradient(
+  background-image: repeating-linear-gradient(
     90deg,
-    var(--madera) 0 118px,
-    var(--madera-oscura) 118px 120px,
-    #A77550 120px 230px,
-    var(--madera-oscura) 230px 232px
+    var(--color-1) 0 36px,
+    transparent 36px 42px,
+    var(--cuerpo) 42px 78px,
+    transparent 78px 84px,
+    var(--color-2) 84px 120px,
+    transparent 120px 126px,
+    var(--color-3) 126px 162px,
+    transparent 162px 168px
+  );
+  clip-path: polygon(
+    0 0, 100% 0, 100% 70%,
+    95% 100%, 90% 70%, 85% 100%, 80% 70%, 75% 100%, 70% 70%,
+    65% 100%, 60% 70%, 55% 100%, 50% 70%, 45% 100%, 40% 70%,
+    35% 100%, 30% 70%, 25% 100%, 20% 70%, 15% 100%, 10% 70%,
+    5% 100%, 0 70%
   );
 }
+
+/* Macetas decorativas */
+
+.maceta {
+  position: absolute;
+  bottom: 12%;
+  width: clamp(68px, 16vw, 95px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.maceta-izquierda {
+  left: 3%;
+}
+
+.maceta-derecha {
+  right: 3%;
+}
+
+/* Piñata colgante */
 
 .colgante {
   position: absolute;
   top: 0;
   left: 50%;
-  z-index: 1;
-  width: 0;
-  height: 0;
+  transform-origin: top center;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cuerda {
-  position: absolute;
-  top: 0;
-  left: -2px;
-  width: 4px;
-  height: var(--cuerda);
-  background: var(--mecate);
-  transform-origin: 50% 0;
+  display: block;
+  width: 5px;
+  height: 75px;
+  background: repeating-linear-gradient(45deg, var(--mecate) 0 6px, #9E733E 6px 12px);
+  border-left: 1.5px solid var(--tinta);
+  border-right: 1.5px solid var(--tinta);
+  transform-origin: top center;
 }
 
 .pinata {
-  position: absolute;
-  top: calc(var(--cuerda) - var(--tam) * 0.345);
-  left: 0;
-  width: var(--tam);
-  height: var(--tam);
-  translate: -50% 0;
+  margin-top: -12px;
   padding: 0;
-  border: 0;
   background: none;
+  border: none;
   cursor: pointer;
-  /* Solo cuenta como golpe si tocas el dibujo, no las esquinas vacías */
-  pointer-events: none;
+  outline: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.pinata:focus-visible {
-  outline: 3px dashed var(--tinta);
-  outline-offset: -8%;
-  border-radius: 50%;
+.pinata:focus-visible .dibujo {
+  filter: drop-shadow(0 0 8px var(--color-1));
 }
 
 .dibujo {
-  display: block;
-  width: 100%;
-  height: 100%;
+  width: clamp(190px, 46vw, 240px);
+  height: clamp(190px, 46vw, 240px);
   overflow: visible;
-  transform-origin: 50% 34.5%;
-  filter: drop-shadow(0 14px 14px rgb(43 29 20 / 0.18));
-}
-
-.dibujo * {
-  pointer-events: visiblePainted;
+  filter: drop-shadow(0 6px 0 rgb(43 29 20 / 0.2));
 }
 
 .dibujo.golpe {
-  animation: golpe 0.32s ease-out;
+  animation: sacudida 0.25s ease-out;
 }
 
-@keyframes golpe {
-  0% { scale: 1; }
-  30% { scale: 1.07 0.9; }
-  65% { scale: 0.97 1.04; }
-  100% { scale: 1; }
+@keyframes sacudida {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.86, 1.12) rotate(-6deg); }
+  65% { transform: scale(1.08, 0.92) rotate(5deg); }
+  100% { transform: scale(1); }
 }
 
-/* Colores del dibujo: usan las variables del TODO 3 */
+/* Estilos SVG de la piñata */
+
+.contorno {
+  stroke: var(--tinta);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
 .relleno-1 { fill: var(--color-1); }
 .relleno-2 { fill: var(--color-2); }
 .relleno-3 { fill: var(--color-3); }
 .relleno-cuerpo { fill: var(--cuerpo); }
-.trazo-1 { stroke: var(--color-1); }
-.trazo-2 { stroke: var(--color-2); }
-.trazo-3 { stroke: var(--color-3); }
-
-.contorno {
-  stroke: var(--tinta);
-  stroke-width: 4;
-  stroke-linejoin: round;
-}
 
 .borla {
-  fill: none;
-  stroke-width: 5;
+  stroke-width: 4;
   stroke-linecap: round;
 }
 
-/* Papel de china alrededor del centro */
 .fleco {
   fill: none;
-  stroke-width: 12;
-  stroke-dasharray: 2.6 2;
+  stroke-width: 5;
+  stroke-dasharray: 4 7;
+  stroke-linecap: round;
 }
+
+.trazo-1 { stroke: var(--color-1); }
+.trazo-2 { stroke: var(--color-2); }
+.trazo-3 { stroke: var(--color-3); }
 
 .grieta {
   fill: none;
@@ -273,116 +216,136 @@ body::before {
   opacity: 1;
 }
 
-/* La letra de la canción */
+/* Verso de la canción */
 
 .verso {
   position: absolute;
-  bottom: 22px;
+  bottom: 14px;
   left: 50%;
-  z-index: 2;
-  width: max-content;
-  max-width: calc(100% - 2rem);
+  transform: translateX(-50%);
   margin: 0;
-  translate: -50% 0;
-  font-size: clamp(1.1rem, 3.8vw, 1.35rem);
-  font-style: italic;
-  font-weight: 600;
-  color: var(--blanco);
-  text-shadow: 0 2px 0 var(--madera-oscura);
+  padding: 0.45rem 1rem;
+  background: var(--blanco);
+  border: 3px solid var(--tinta);
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--tinta);
+  font-weight: 800;
+  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  white-space: nowrap;
+  z-index: 6;
   pointer-events: none;
 }
 
-.verso.nuevo {
-  animation: verso 0.25s ease-out;
+.verso:empty {
+  display: none;
 }
 
-@keyframes verso {
-  from { opacity: 0.2; translate: -50% 6px; }
+.verso.nuevo {
+  animation: brinco 0.25s ease-out;
+}
+
+@keyframes brinco {
+  50% { transform: translateX(-50%) scale(1.1); }
+}
+
+/* Pantalla final */
+
+.final {
+  position: absolute;
+  top: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(88%, 360px);
+  padding: 1.25rem;
+  background: var(--blanco);
+  border: 4px solid var(--tinta);
+  border-radius: 20px;
+  box-shadow: 0 6px 0 var(--tinta);
+  text-align: center;
+  z-index: 12;
+  animation: aparecer 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.final[hidden] {
+  display: none;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateX(-50%) scale(0.8); }
+  to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+.mensaje {
+  margin: 0 0 0.4rem;
+  font-family: var(--fuente-rotulo);
+  font-size: 1.45rem;
+  color: var(--color-1);
+}
+
+.resumen {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.boton {
+  padding: 0.65rem 1.3rem;
+  background: var(--cuerpo);
+  color: var(--tinta);
+  border: 3px solid var(--tinta);
+  border-radius: 12px;
+  box-shadow: 0 4px 0 var(--tinta);
+  font-family: var(--fuente-base);
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.boton:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--tinta);
+}
+
+/* Marcadores inferiores */
+
+.contadores {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
 }
 
 .marcador,
 .bolsa {
-  margin: 1rem 0 0;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Cuando se rompe */
-
-.final {
-  position: absolute;
-  inset: 14% 1rem auto;
-  z-index: 4;
-  width: min(26rem, calc(100% - 2rem));
-  margin-inline: auto;
-  display: grid;
-  justify-items: center;
-  gap: 0.6rem;
-  padding: 1.25rem 1rem 1.5rem;
+  margin: 0;
+  padding: 0.4rem 1rem;
   background: var(--blanco);
   border: 3px solid var(--tinta);
-  border-radius: 20px;
-  box-shadow: 0 14px 30px rgb(43 29 20 / 0.15);
-  cursor: auto;
-  animation: aparecer 0.4s cubic-bezier(0.2, 1.4, 0.4, 1);
+  border-radius: 12px;
+  box-shadow: 0 3px 0 var(--tinta);
+  font-weight: 800;
+  font-size: 1.05rem;
 }
 
-@keyframes aparecer {
-  from { opacity: 0; scale: 0.8; }
-}
-
-.mensaje {
-  margin: 0;
-  font-family: var(--fuente-rotulo);
-  font-size: clamp(1.75rem, 6vw, 2.75rem);
-  line-height: 1.1;
-  color: var(--color-1);
-  text-wrap: balance;
-}
-
-.resumen {
-  max-width: 30ch;
-  margin: 0;
-}
-
-.boton {
-  margin-top: 0.5rem;
-  padding: 0.85em 1.6em;
-  border: 0;
-  border-radius: 999px;
-  background: var(--color-1);
-  color: #FFFFFF;
-  font: 600 1.0625rem/1 var(--fuente);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-
-.boton:hover {
-  transform: translateY(-1px);
-}
-
-.boton:active {
-  transform: translateY(1px);
-}
-
-.boton:focus-visible {
-  outline: 3px solid var(--tinta);
-  outline-offset: 4px;
+.bolsa {
+  background: var(--cuerpo);
 }
 
 .pie {
-  padding: 1.5rem 1rem;
+  font-size: 0.85rem;
+  opacity: 0.75;
   text-align: center;
-  font-size: 0.875rem;
-  color: rgb(43 29 20 / 0.65);
 }
 
-/* Dulces, confeti y pedazos */
+/* Capa de dulces y confeti */
 
 .capa {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 10;
+  overflow: hidden;
   pointer-events: none;
 }
 
